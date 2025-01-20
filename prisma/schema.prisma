@@ -105,10 +105,10 @@ model Balance {
   transactionId String @map("transaction_id")
   statusGuid    String @map("status_guid")
 
-  user_guids       User           @relation(fields: [userGuid], references: [guid])
-  tariff_guids     Tariff         @relation(fields: [tariffGuid], references: [guid])
-  services_guids   Service        @relation(fields: [serviceGuid], references: [guid])
-  balance_statuses balanceStatus? @relation(fields: [statusGuid], references: [guid])
+  user_guids       User          @relation(fields: [userGuid], references: [guid])
+  tariff_guids     Tariff        @relation(fields: [tariffGuid], references: [guid])
+  services_guids   Service       @relation(fields: [serviceGuid], references: [guid])
+  balance_statuses balanceStatus @relation(fields: [statusGuid], references: [guid])
 
   @@map("balance")
 }

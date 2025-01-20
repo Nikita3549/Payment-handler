@@ -15,7 +15,7 @@ const app =  new class App{
     }
     public start(){
         try{
-            this._app.listen(this.PORT,() => {
+            this._app.listen(this.PORT, '0.0.0.0', () => {
                 console.log(`Server started on PORT ${this.PORT}`)
             })
         }catch (e){
@@ -26,7 +26,7 @@ const app =  new class App{
         this._app.disable('x-powered-by')
         this._app.use(express.urlencoded({ extended: true }))
         this._app.use(express.json())
-        this._app.use('/api', router)
+        this._app.use('/v1', router)
         this._app.use(APIErrorMiddleware) // error handler
     }
 
