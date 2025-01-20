@@ -1,0 +1,24 @@
+{
+  "name": "payment-handler",
+  "version": "1.0.0",
+  "main": "dist/app.js",
+  "scripts": {
+      "build": "npx tsc"
+  },
+  "keywords": [],
+  "author": "Nikita Tsarenko",
+  "description": "Service for processing orders through integration with external services",
+  "dependencies": {
+    "@prisma/client": "^6.2.1",
+    "express": "^4.21.2",
+    "dotenv": "^16.4.7",
+    "express-validator": "^7.2.0",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3",
+    "ts-node": "^10.9.2",
+    "@types/express": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.7"
+  }
+}
