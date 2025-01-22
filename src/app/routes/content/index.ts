@@ -4,6 +4,6 @@ import {ContentController} from "../../controllers/content/contentController.cla
 const router = Router()
 const contentController = new ContentController()
 
-router.get('/', contentController.getContent)
+router.get('/content', contentController.getContent)
 
 export default router
