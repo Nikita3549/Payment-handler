@@ -1,7 +1,16 @@
-import express ,{Express} from "express";
+import express ,{Express, Request} from "express";
 import {EnvConfig} from "../config/env/envConfig.class";
 import {APIErrorMiddleware} from "./middlewares/api-error.function";
 import router from "./routes";
+import {jwtPayload} from "./services/token/interfaces";
+
+declare global {
+    namespace Express {
+        interface Request{
+            user: jwtPayload
+        }
+    }
+}
 
 const app =  new class App{
     private readonly PORT: number
@@ -12,6 +21,7 @@ const app =  new class App{
         this._app = express()
 
         this.setMiddlewares()
+
     }
     public start(){
         try{

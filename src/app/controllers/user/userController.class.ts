@@ -129,7 +129,7 @@ export class UserController implements IUserController{
                 throw ApiError.BadRequest()
             }
 
-            const jwtPayload = await new UserService().updateUserData(updateData, (req.user as jwtPayload).guid)
+            const jwtPayload = await new UserService().updateUserData(updateData, req.user.guid)
                 .catch(() => { throw ApiError.BadRequest()})
 
             const jwtToken = new TokenService().generateJWT(jwtPayload)
