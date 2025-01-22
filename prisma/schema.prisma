@@ -20,7 +20,7 @@ model User {
   email          String  @unique
   hashedPassword String  @map("hashed_password")
   name           String?
-  birthday       BigInt?
+  birthday       Int?
   gender         Gender?
   balance        Int     @default(0)
 
@@ -71,8 +71,8 @@ model Order {
   guid        String @id @default(uuid())
   userGuid    String @map("user_guid")
   serviceGuid String @map("service_guid")
-  dateCreate  BigInt
-  dateUpdate  BigInt
+  dateCreate  Int
+  dateUpdate  Int
   cost        Int
   title       String
   text        String
@@ -97,8 +97,8 @@ model balanceStatus {
 model Balance {
   guid          String @id @default(uuid())
   userGuid      String @map("user_guid")
-  dateCreate    BigInt @map("date_create")
-  dateUpdate    BigInt @map("date_update")
+  dateCreate    Int    @map("date_create")
+  dateUpdate    Int    @map("date_update")
   cost          Int
   tariffGuid    String @map("tariff_guid")
   serviceGuid   String @map("service_guid")
