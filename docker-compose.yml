@@ -1,0 +1,35 @@
+services:
+  db:
+    image: postgres
+    container_name: database
+    networks:
+      - mainNetwork
+    environment:
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_DB: ${DATABASE_DBNAME}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - ${DATABASE_PORT}:5432
+  api:
+    container_name: api
+    build:
+      context: .
+    restart: always
+    ports:
+      - 3000:${DEV_PORT}
+    volumes:
+      - ./.env:/opt/api/.env
+    networks:
+      - mainNetwork
+    depends_on:
+      - db
+    command: sh -c "cd /opt/api/ && npm start"
+
+networks:
+  mainNetwork:
+    driver: bridge
+
+volumes:
+  db_data:
