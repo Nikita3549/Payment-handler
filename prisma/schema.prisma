@@ -24,8 +24,10 @@ model User {
   gender         Gender?
   balance        Int     @default(0)
 
-  orders   Order[]
-  balances Balance[]
+  orders     Order[]
+  writtenoff Writtenoff[]
+  paid       Replenishment[]
+  refund     Refund[]
 
   @@map("users")
 }
@@ -39,7 +41,7 @@ model Tariff {
   title       String
   description String
 
-  balances Balance[]
+  replenishment Replenishment[]
 
   @@map("tariffs")
 }
@@ -52,65 +54,72 @@ model Service {
   title       String
   description String
 
-  orders   Order[]
-  balances Balance[]
+  orders     Order[]
+  refund     Refund[]
+  writtenoff Writtenoff[]
 
   @@map("services")
 }
 
-model OrderStatus {
-  guid String @id @default(uuid())
-  name String
-
-  orders Order[]
-
-  @@map("orders_status")
-}
-
 model Order {
-  guid        String @id @default(uuid())
-  userGuid    String @map("user_guid")
-  serviceGuid String @map("service_guid")
+  guid        String      @id @default(uuid())
+  userGuid    String      @map("user_guid")
+  serviceGuid String      @map("service_guid")
   dateCreate  Int
   dateUpdate  Int
   cost        Int
   title       String
   text        String
-  statusGuid  String @map("status_guid")
+  status      OrderStatus
 
-  user_guids    User        @relation(fields: [userGuid], references: [guid])
-  service_guids Service     @relation(fields: [serviceGuid], references: [guid])
-  status_guids  OrderStatus @relation(fields: [statusGuid], references: [guid])
+  user_guids    User    @relation(fields: [userGuid], references: [guid])
+  service_guids Service @relation(fields: [serviceGuid], references: [guid])
 
   @@map("orders")
 }
 
-model balanceStatus {
-  guid String @id @default(uuid())
-  name String
+model Writtenoff {
+  guid        String @id @default(uuid())
+  userGuid    String @map("user_guid")
+  dateCreate  Int    @map("date_create")
+  dateUpdate  Int    @map("date_update")
+  cost        Int
+  serviceGuid String @map("service_guid")
 
-  balances Balance[]
+  user_guid      User    @relation(fields: [userGuid], references: [guid])
+  services_guids Service @relation(fields: [serviceGuid], references: [guid])
 
-  @@map("balance_status")
+  @@map("writtenoff")
 }
 
-model Balance {
-  guid          String @id @default(uuid())
-  userGuid      String @map("user_guid")
-  dateCreate    Int    @map("date_create")
-  dateUpdate    Int    @map("date_update")
+model Replenishment {
+  guid          String              @id @default(uuid())
+  userGuid      String              @map("user_guid")
+  dateCreate    Int                 @map("date_create")
+  dateUpdate    Int                 @map("date_update")
   cost          Int
-  tariffGuid    String @map("tariff_guid")
-  serviceGuid   String @map("service_guid")
-  transactionId String @map("transaction_id")
-  statusGuid    String @map("status_guid")
+  tariffGuid    String              @map("tariff_guid")
+  transactionId String              @map("transaction_id")
+  status        ReplenishmentStatus
 
-  user_guids       User          @relation(fields: [userGuid], references: [guid])
-  tariff_guids     Tariff        @relation(fields: [tariffGuid], references: [guid])
-  services_guids   Service       @relation(fields: [serviceGuid], references: [guid])
-  balance_statuses balanceStatus @relation(fields: [statusGuid], references: [guid])
+  user_guid    User   @relation(fields: [userGuid], references: [guid])
+  tariff_guids Tariff @relation(fields: [tariffGuid], references: [guid])
 
-  @@map("balance")
+  @@map("replenishment")
+}
+
+model Refund {
+  guid        String @id @default(uuid())
+  userGuid    String @map("user_guid")
+  dateCreate  Int    @map("date_create")
+  dateUpdate  Int    @map("date_update")
+  cost        Int
+  serviceGuid String @map("service_guid")
+
+  user_guid      User    @relation(fields: [userGuid], references: [guid])
+  services_guids Service @relation(fields: [serviceGuid], references: [guid])
+
+  @@map("refund")
 }
 
 enum Gender {
@@ -118,4 +127,16 @@ enum Gender {
   female
 
   @@map("gender")
+}
+
+enum ReplenishmentStatus {
+  in_process
+  paid
+}
+
+enum OrderStatus {
+  in_queue
+  in_process
+  completed
+  failed
 }

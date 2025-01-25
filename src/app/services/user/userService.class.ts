@@ -71,4 +71,29 @@ export class UserService implements IUserService{
         })
     }
 
+    async decreaseBalance(userGuid: string, decreaseCost: number){
+        await prisma.user.update({
+            data: {
+                balance: {
+                    decrement: decreaseCost
+                }
+            },
+            where: {
+                guid: userGuid
+            }
+        })
+    }
+
+    async increaseBalance(userGuid: string, increaseCost: number) {
+        await prisma.user.update({
+            data: {
+                balance: {
+                    increment: increaseCost
+                }
+            },
+            where: {
+                guid: userGuid
+            }
+        })
+    }
 }

@@ -8,6 +8,7 @@ COPY tsconfig.json ./
 RUN npm run build
 
 FROM node:22-alpine
+RUN apk add curl
 WORKDIR opt/api
 COPY package.json ./
 COPY prisma ./

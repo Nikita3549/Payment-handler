@@ -5,6 +5,6 @@ import {ServiceController} from "../../controllers/service/serviceController.cla
 const router = Router()
 const serviceController = new ServiceController()
 
-router.get('/service', authenticate, serviceController.getTariffs)
+router.get('/', authenticate, serviceController.getTariffs)
 
 export default router

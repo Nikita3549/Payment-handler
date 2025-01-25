@@ -7,4 +7,6 @@ export interface IUserService{
     getData(email: string): Promise<User | null>,
     generatePassword(): string
     updateUserData(updateData: Record<string, any>, guid: string): Promise<jwtPayload>
+    decreaseBalance(userGuid: string, decreaseCost: number): void
+    increaseBalance(userGuid: string, increaseCost: number): void
 }

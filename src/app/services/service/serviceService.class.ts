@@ -11,4 +11,12 @@ export class ServiceService implements IServiceService{
         })
     }
 
+    async getActiveServiceById(guid: string): Promise<Service | null> {
+        return prisma.service.findFirst({
+            where: {
+                guid,
+                active: true
+            }
+        })
+    }
 }
