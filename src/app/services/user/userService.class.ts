@@ -29,13 +29,22 @@ export class UserService implements IUserService{
         return !(count == 0)
     }
 
-    async getData(email: string): Promise<User | null> {
+    async getDataByEmail(email: string): Promise<User | null> {
         return prisma.user.findFirst({
             where: {
                 email
             }
         })
     }
+
+    async getDataById(guid: string): Promise<User | null> {
+        return prisma.user.findFirst({
+            where: {
+                guid
+            }
+        })
+    }
+
 
     generatePassword(length: number = 12): string {
         const lower = 'abcdefghijklmnopqrstuvwxyz';

@@ -21,7 +21,7 @@ export class OrderController implements IOrderController{
             }
 
             const service = await new ServiceService().getActiveServiceById(serviceGuid)
-            const user = await new UserService().getData(req.user.email)
+            const user = await new UserService().getDataByEmail(req.user.email)
 
             if (!service){
                 throw ApiError.BadRequest("This service is inactive or doesn't exist")

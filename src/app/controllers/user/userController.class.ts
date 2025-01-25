@@ -47,7 +47,7 @@ export class UserController implements IUserController{
                 throw ApiError.BadRequest()
             }
 
-            const userData = await new UserService().getData(email)
+            const userData = await new UserService().getDataByEmail(email)
 
             if(userData == null){
                 throw ApiError.NotFound()
@@ -104,9 +104,17 @@ export class UserController implements IUserController{
 
     async getUserData(req: Request, res: Response, next: NextFunction){
         try{
+            const user = await new UserService().getDataById(req.user.guid)
+
+            if(!user){
+                throw ApiError.Unauthorized()
+            }
+
+            const { hashedPassword, ...userWithoutPassword} = user
+
             res
                 .status(200)
-                .send(req.user)
+                .send(userWithoutPassword)
         } catch (e){
             next(e)
         }
