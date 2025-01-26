@@ -32,7 +32,7 @@ ALPHA_... - данные для использования эквайринга 
 
 ALPHA_API_URL - ссылка api альфа банка, ( формат https://alfa.rbsuat.com/payment/rest/ обязательно / на конце)
 ALPHA_REGISTRATION_URI - метод для создания запроса на оплату ( формат register.do  без / )
-ALPHA_GET_STATUS_URI - метод для создания запроса на получение статуса ( формат такой же ^ )
+ALPHA_GET_STATUS_URI - метод для создания запроса на получение статуса ( формат getOrderStatus.do без / )
 ALPHA_LOGIN - логин для api
 ALPHA_PASSWORD - пароль для api 
 ALPHA_RETURN_SUCCESS_URL - http://localhost:DEV_PORT/v1/alfa-bank/success-payment
