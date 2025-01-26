@@ -26,7 +26,6 @@ export default new class Queue implements IQueue{
         this.queue.on('error', (err) => {
             console.error('Failed to connect redis', err);
         });
-
         this.queue.process(this.workerFunc)
     }
 
@@ -36,7 +35,6 @@ export default new class Queue implements IQueue{
 
     private workerFunc = async (job: Job<any>) => {
         const {order, service} = job.data as IServiceAndOrder
-        console.log('start checking')
         debugger
 
         try {
@@ -44,21 +42,17 @@ export default new class Queue implements IQueue{
             const currentDate = new Date().getTime()
 
             if(order.status == OrderStatus.in_queue){
-                console.log('in_queue')
                 if (currentDate - orderCreateDate > THREE_MINUTES_IN_MILLISECONDS){
-                    console.log('success')
                     await new OrderService().changeStatus(order.guid, OrderStatus.in_process)
                     job.data.order.status = OrderStatus.in_process
 
                     this.addToQueueAfter(job, ONE_MINUTE_IN_MILLISECONDS)
                 } else{
-                    console.log('again')
                     this.addToQueueAfter(job, ONE_MINUTE_IN_MILLISECONDS)
                 }
             }
 
             else if (order.status == OrderStatus.in_process){
-                console.log('in_process')
                 if(currentDate - orderCreateDate > EIGHT_MINUTES_IN_MILLISECONDS){
 
                     // business logic

@@ -3,7 +3,7 @@ import {Tariff} from "@prisma/client";
 import prisma from "../../prisma";
 
 export class TariffService implements ITariffService{
-    async getUnArchivedANDActiveActive(): Promise<Tariff[]> {
+    async getUnArchivedANDActiveTariffs(): Promise<Tariff[]> {
         return prisma.tariff.findMany({
             where: {
                 active: true,
@@ -11,4 +11,15 @@ export class TariffService implements ITariffService{
             }
         })
     }
+
+    getUnArchivedANDActiveTariffById(tariffGuid: string): Promise<Tariff | null> {
+        return prisma.tariff.findFirst({
+            where: {
+                guid: tariffGuid,
+                active: true,
+                archive: false
+            }
+        })
+    }
+
 }

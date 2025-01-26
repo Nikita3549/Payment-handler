@@ -1,5 +1,6 @@
 import {Tariff} from "@prisma/client";
 
 export interface ITariffService{
-    getUnArchivedANDActiveActive(): Promise<Tariff[]>
+    getUnArchivedANDActiveTariffs(): Promise<Tariff[]>
+    getUnArchivedANDActiveTariffById(tariffGuid: string): Promise<Tariff | null>
 }

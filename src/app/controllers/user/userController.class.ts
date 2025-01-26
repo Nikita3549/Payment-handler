@@ -85,14 +85,21 @@ export class UserController implements IUserController{
             if(!email){
                 throw ApiError.BadRequest()
             }
-            if(!await new UserService().doesExist(email)){
+            const user = await new UserService().getDataByEmail(email)
+
+            if(!user){
                 res.status(200).send()
                 return
             }
 
             const newPassword = new UserService().generatePassword()
+            const newHashedPassword = await new Hash().hash(newPassword)
 
             await new MailService().sendResetPassword(email, newPassword)
+
+            await new UserService().updateUserData({
+                hashedPassword: newHashedPassword
+            }, user.guid)
 
             res
                 .status(200)

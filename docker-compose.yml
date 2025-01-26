@@ -18,7 +18,7 @@ services:
       context: .
     restart: always
     ports:
-      - 3000:${DEV_PORT}
+      - 3000:${API_PORT}
     volumes:
       - ./.env:/opt/api/.env
     networks:

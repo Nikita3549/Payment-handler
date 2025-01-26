@@ -3,7 +3,9 @@ import contentRouter from "./content";
 import userRouter from "./user";
 import tariffRouter from "./tariff";
 import serviceRouter from "./service";
-import orderController from "./order";
+import orderRouter from "./order";
+import balanceRouter from "./balance";
+import alfaBankRouter from "./alfa-bank";
 
 const router = Router()
 
@@ -11,6 +13,8 @@ router.use('/content', contentRouter)
 router.use('/', userRouter)
 router.use('/tariff', tariffRouter)
 router.use('/service', serviceRouter)
-router.use('/order', orderController)
+router.use('/order', orderRouter)
+router.use('/', balanceRouter)
+router.use('/alfa-bank', alfaBankRouter)
 
 export default router

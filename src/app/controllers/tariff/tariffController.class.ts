@@ -5,7 +5,7 @@ import {TariffService} from "../../services/tariff/tariffService.class";
 export class TariffController implements ITariffController{
     async getTariffs(_req: Request, res: Response, next: NextFunction) {
         try{
-            const tariffs = await new TariffService().getUnArchivedANDActiveActive()
+            const tariffs = await new TariffService().getUnArchivedANDActiveTariffs()
 
             res
                 .status(200)

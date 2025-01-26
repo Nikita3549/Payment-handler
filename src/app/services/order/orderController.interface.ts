@@ -5,5 +5,5 @@ export interface IOrderService{
     changeText(orderGuid: string, text: string): void
     changeStatus(orderGuid: string, status: OrderStatus): void
     getUserOrders(userGuid: string): Promise<Order[]>
-    getOrderById(orderGuid: string): Promise<Order | null>
+    getOrderById(orderGuid: string, userGuid: string): Promise<Order | null>
 }

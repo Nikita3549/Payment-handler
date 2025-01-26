@@ -24,10 +24,10 @@ model User {
   gender         Gender?
   balance        Int     @default(0)
 
-  orders     Order[]
-  writtenoff Writtenoff[]
-  paid       Replenishment[]
-  refund     Refund[]
+  orders        Order[]
+  writtenoff    Writtenoff[]
+  replenishment Replenishment[]
+  refund        Refund[]
 
   @@map("users")
 }
@@ -99,7 +99,7 @@ model Replenishment {
   dateUpdate    Int                 @map("date_update")
   cost          Int
   tariffGuid    String              @map("tariff_guid")
-  transactionId String              @map("transaction_id")
+  transactionId String?             @map("transaction_id")
   status        ReplenishmentStatus
 
   user_guid    User   @relation(fields: [userGuid], references: [guid])
@@ -132,6 +132,7 @@ enum Gender {
 enum ReplenishmentStatus {
   in_process
   paid
+  failed
 }
 
 enum OrderStatus {

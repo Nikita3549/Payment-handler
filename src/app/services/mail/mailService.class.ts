@@ -12,7 +12,7 @@ export class MailService implements IMailService{
             port: 465,
             secure: true,
             auth: {
-                user: new EnvConfig().get('YANDEX_EMAIL'),
+                user: new EnvConfig().get('YANDEX_LOGIN'),
                 pass: new EnvConfig().get('YANDEX_PASSWORD'),
             }
         })

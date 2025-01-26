@@ -82,7 +82,7 @@ export class OrderController implements IOrderController{
                 throw ApiError.BadRequest()
             }
 
-            const order = await new OrderService().getOrderById(orderId)
+            const order = await new OrderService().getOrderById(orderId, req.user.guid)
 
             if (!order){
                 throw ApiError.NotFound()

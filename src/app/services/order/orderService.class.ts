@@ -51,10 +51,11 @@ export class OrderService implements IOrderService{
         })
     }
 
-    async getOrderById(orderGuid: string): Promise<Order | null> {
+    async getOrderById(orderGuid: string, userGuid: string): Promise<Order | null> {
         return prisma.order.findFirst({
             where: {
-                guid: orderGuid
+                guid: orderGuid,
+                userGuid: userGuid
             }
         })
     }

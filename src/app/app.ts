@@ -17,7 +17,7 @@ const app =  new class App{
     private readonly _app: Express
 
     constructor() {
-        this.PORT = +new EnvConfig().get("DEV_PORT")
+        this.PORT = +new EnvConfig().get("API_PORT")
         this._app = express()
 
         this.setMiddlewares()
