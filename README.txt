@@ -40,3 +40,5 @@ ALPHA_RETURN_FAILED_URL - http://localhost:DEV_PORT/v1/alfa-bank/failed-payment 
 ALPHA_REDIRECT_TO_FAIL - Ссылка на страничку после неудачной оплаты 
 ALPHA_REDIRECT_TO_SUCCESS - Ссылка на страничку после удачной оплаты
 
+2. Скачайте докер с официального сайт.
+При помощи команды cd зайдите в корень проекта и запустите команду docker compose up
