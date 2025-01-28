@@ -37,6 +37,10 @@ export class BalanceController implements IBalanceController{
         try {
             const operationHistory = await new BalanceService().getOperationsHistory(req.user.guid)
 
+            if(!operationHistory.replenishments[0] && !operationHistory.refunds[0] && !operationHistory.writtenoffs[0]){
+                throw ApiError.NotFound()
+            }
+
             res
                 .status(200)
                 .send(operationHistory)

@@ -1,5 +1,5 @@
 import {IOrderController} from "./orderController.interface";
-import e, { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 import {ApiError} from "../../../utils/api-error/api-error.class";
 import {ServiceService} from "../../services/service/serviceService.class";
 import {UserService} from "../../services/user/userService.class";
@@ -7,9 +7,6 @@ import {OrderService} from "../../services/order/orderService.class";
 import Queue from "../../queue/queue.class";
 import {IServiceAndOrder} from "../../queue/interfaces/serviceAndOrder.interface";
 import {BalanceService} from "../../services/balance/balanceService.class";
-import service from "../../routes/service";
-import user from "../../routes/user";
-import order from "../../routes/order";
 
 export class OrderController implements IOrderController{
     async createOrder(req: Request, res: Response, next: NextFunction) {
@@ -65,6 +62,10 @@ export class OrderController implements IOrderController{
     async getOrders(req: Request, res: Response, next: NextFunction) {
         try {
             const orders = await new OrderService().getUserOrders(req.user.guid)
+
+            if (!orders[0]){
+                throw ApiError.NotFound()
+            }
 
             res
                 .status(200)
