@@ -16,5 +16,8 @@ router.use('/service', serviceRouter)
 router.use('/order', orderRouter)
 router.use('/', balanceRouter)
 router.use('/alfa-bank', alfaBankRouter)
+router.use((req, res, next) => {
+    res.status(405).send();
+})
 
 export default router

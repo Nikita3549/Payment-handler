@@ -70,7 +70,7 @@ export class OrderController implements IOrderController{
                 .status(200)
                 .send(orders)
         } catch (e){
-            next()
+            next(e)
         }
     }
 
@@ -92,7 +92,7 @@ export class OrderController implements IOrderController{
                 .status(200)
                 .send(order)
         } catch (e){
-            next()
+            next(e)
         }
     }
 

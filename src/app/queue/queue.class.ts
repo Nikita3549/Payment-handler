@@ -35,7 +35,6 @@ export default new class Queue implements IQueue{
 
     private workerFunc = async (job: Job<any>) => {
         const {order, service} = job.data as IServiceAndOrder
-        debugger
 
         try {
             const orderCreateDate = DateConverter.fromUnix(order.dateCreate).getTime()
