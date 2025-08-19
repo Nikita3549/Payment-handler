@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres
+    image: postgres:17
     container_name: database
     networks:
       - mainNetwork
@@ -14,6 +14,8 @@ services:
       - ${DATABASE_PORT}:5432
   api:
     container_name: api
+    profiles:
+      - api
     build:
       context: .
     restart: always

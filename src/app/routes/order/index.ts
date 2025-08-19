@@ -5,7 +5,7 @@ import authenticate from "../../middlewares/authenticate";
 const router = Router()
 const orderController = new OrderController()
 
-router.post('/', authenticate, orderController.createOrder)
+router.post('/', orderController.createOrder)
 router.get('/', authenticate, orderController.getOrders)
 router.get('/:id', authenticate, orderController.getOrderById)
 

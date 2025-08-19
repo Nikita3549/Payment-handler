@@ -23,7 +23,9 @@ const app =  new class App{
         this.setMiddlewares()
 
     }
-    public start(){
+    public start()
+    {
+        this.app.get('/posts', (req, res) => {})
         try{
             this._app.listen(this.PORT, '0.0.0.0', () => {
                 console.log(`Server started on PORT ${this.PORT}`)

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "dist/app.js",
   "scripts": {
-    "dev": "ts-node src/app/app.ts",
+    "dev": "nodemon src/app/app.ts",
     "build": "npx tsc",
     "start": "node dist/app/app.js"
   },
@@ -21,7 +21,7 @@
     "express-validator": "^7.2.0",
     "ioredis": "^5.4.2",
     "jsonwebtoken": "^9.0.2",
-    "nodemailer": "^6.9.16",
+    "nodemailer": "^6.10.0",
     "prisma": "^6.2.1"
   },
   "devDependencies": {
